@@ -21,6 +21,7 @@ class BaseProfile(models.Model):
 class MemberProfile(BaseProfile):
     """ NOTE: Profil du membre lié à l'utilisateur Django """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    discord_id = models.CharField(max_length=50, unique=True)
     discord_username = models.CharField(max_length=100, unique=True)
     discord_roles = models.ManyToManyField('Role', related_name='discord_roles')
     is_invited = models.BooleanField(default=True) # Si admin active le membre = False
