@@ -34,13 +34,15 @@ class Rarity(models.Model):
 class Perk(models.Model):
     ALLOWED_ITEM_TYPES = [
         ('headwear', 'Helmet'),
-        ('headwear', 'Helmet'),
         ('chestwear', 'Chest'),
         ('glove', 'Gloves'),
         ('legwaer', 'Legs'),
         ('footwear', 'Boots'),
+        ('ring', 'Rings'),
+        ('earswear', 'Ears'),
+        ('necklace', 'Necklace'),
         ('primary_weapon', 'Primary Weapon'),
-        ('secondary_weapon', 'Secondary Weapon')
+        ('secondary_weapon', 'Secondary Weapon'),
     ]
     name = models.CharField(max_length=100)
     description = models.TextField()
