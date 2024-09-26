@@ -4,6 +4,8 @@ from inventory.models import Item
 
 """
     => Un `Profile` est un membre Discord 
+        🔸 C'est un compte "invité" qui est une copie de l'utilisateur discord (sans droit)
+        🔸 Un user discord peut créer son compte et c'est le memberprofile qui sera lié à l'user django
         🔸 Il peut avoir plusieurs rôles liés à Discord (Management, Staff, Recruiter, etc)
         🔸 Une image comme avatar pour son profil (à mon avis ce sera récup de Discord)
         🔸 Associé au compte Discord (id, pseudo ..)
@@ -39,29 +41,33 @@ class BaseProfile(models.Model):
 
 class MemberProfile(BaseProfile):
     """ 
-    NOTE: Profil du membre lié à l'utilisateur Django 
+    Profil du membre lié à l'utilisateur Django 
     A voir si je garde le BaseProfile qui donne accès à l'avatar pour les deux autres models ou pas
+    Si `user` est null => il s'agit d'un user invité = n'a pas créé de compte sur le site
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     # avatar = models.ImageField(upload_to = "avatars/", blank=True, null=True)
     discord_id = models.CharField(max_length=50, unique=True)
     discord_username = models.CharField(max_length=100, unique=True)
     discord_roles = models.ManyToManyField('Role', related_name='discord_roles', blank=True)
-    is_invited = models.BooleanField(default=True) # Si admin active le membre = False
+    is_invited = models.BooleanField(default=True) # True = phase d'invitation, False = membre confirmé
 
 
     def __str__(self):
-        return f'{self.discord_username} (User: {self.user.username})'
+        return f'{self.discord_username} (User: {self.user.username if self.user else 'Invité'})'
 
 
 class Character(BaseProfile):
-    """ NOTE: Personnage en jeu créé par un utilisateur """ 
+    """
+    Personnage en jeu créé par un utilisateur ou membre Discord
+    Le propriétaire peut être soit un invité (MemberProfile) soit un utilisateur avec un compte Django
+    """
     pseudo_in_game = models.CharField(max_length=100, unique=True)
     owner = models.ForeignKey(MemberProfile, on_delete=models.CASCADE, related_name='characters')
+    active_role = models.ForeignKey('CharacterRole', on_delete=models.SET_NULL, null=True, blank=True, related_name='active_characters')
     
-
     def __str__(self):
-        return f"{self.game_username} (Owned by: {self.owner.discord_username})"
+        return f"{self.pseudo_in_game} (Owned by: {self.owner.discord_username})"
 
 
 class CharacterRole(models.Model):
