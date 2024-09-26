@@ -1,6 +1,13 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets 
-from .models import Character, Role, MemberProfile, CharacterRole
-from .serializers import CharacterSerializer, RoleSerializer, MemberProfileSerializer, CharacterRoleSerializer
+from .models import Character, Role, MemberProfile, CharacterRole, User
+from .serializers import CharacterSerializer, RoleSerializer, MemberProfileSerializer, CharacterRoleSerializer, UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
 
 class CharacterViewSet(viewsets.ModelViewSet):
     queryset = Character.objects.all()
