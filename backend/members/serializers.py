@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CharacterSerializer(serializers.HyperlinkedModelSerializer):
-    roles = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='role-detail')
+    roles = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='characterrole-detail')
     class Meta: 
         model = Character
         fields = ['url', 'pseudo_in_game', 'owner', 'active_role', 'roles']
@@ -29,17 +29,22 @@ class RoleSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta: 
         model = Role
-        fields = ['url', 'name', 'type', 'types']
+        fields = ['url', 'name', 'type']
 
 
 
 class MemberProfileSerializer(serializers.HyperlinkedModelSerializer):
     characters = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='character-detail')
-    discord_roles = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='role-detail')
+
+    discord_roles = serializers.HyperlinkedRelatedField(
+        many=True,
+        view_name='role-detail',  # Assure-toi que cela fait référence aux rôles Discord
+        queryset=Role.objects.filter(type='discord')  # Ne montre que les rôles Discord
+    )
     
     class Meta: 
         model = MemberProfile
-        fields = ['url', 'user', 'discord_id', 'discord_username', 'discord_roles', 'is_invited', 'characters']
+        fields = ['url', 'user', 'discord_id', 'discord_username', 'discord_roles', 'is_invited', 'characters',]
 
 
 
