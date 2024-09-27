@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from inventory.models import Item
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 """
     => Un `Profile` est un membre Discord 
@@ -68,6 +68,11 @@ class Character(BaseProfile):
     
     def __str__(self):
         return f"{self.pseudo_in_game} (Owned by: {self.owner.discord_username})"
+    
+    def get_permissions(self):
+        if self.request.method in ['GET', 'HEAD', 'OPTIONS']:
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
 
 class CharacterRole(models.Model):
