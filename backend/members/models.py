@@ -38,7 +38,6 @@ class BaseProfile(models.Model):
         abstract = True 
 
 
-
 class MemberProfile(BaseProfile):
     """ 
     Profil du membre lié à l'utilisateur Django 
