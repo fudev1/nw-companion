@@ -76,7 +76,7 @@ class Character(BaseProfile):
 
 class CharacterRole(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='roles')
-    role = models.ForeignKey('Role', limit_choices_to={'type': 'game'} ,on_delete=models.CASCADE, null=True, blank=True)
+    classe = models.ForeignKey('Role', limit_choices_to={'type': 'game'} ,on_delete=models.CASCADE, null=True, blank=True)
     is_war_ready = models.BooleanField(default=False)
     gear_score = models.IntegerField()
     headwear = models.ForeignKey('inventory.Item', on_delete=models.SET_NULL, null=True, related_name="headwear_roles")
