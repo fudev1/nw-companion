@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import MemberProfile
+from .serializers import MemberProfileSerializer
 
-# Create your views here.
+
+class MemberProfileViewSet(viewsets.ModelViewSet):
+    queryset = MemberProfile.objects.all()
+    serializer_class = MemberProfileSerializer
+

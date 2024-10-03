@@ -25,8 +25,9 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/members/', include('members.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
+    path('api/members/', include('discord.members.urls')),
+    path('api/members/roles', include('discord.roles.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     

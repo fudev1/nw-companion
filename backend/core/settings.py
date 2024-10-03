@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+import sys
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(BASE_DIR, 'discord'))
+sys.path.append(os.path.join(BASE_DIR, 'new_world'))
+
 # Initialiser le chargement de .env
 load_dotenv()
 
@@ -42,9 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'inventory',
-    # 'members',
-    # 'wars',
+    'discord.members',
+    'discord.roles',
+    'new_world.characters',
+    'new_world.wars',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
