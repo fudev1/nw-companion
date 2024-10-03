@@ -28,5 +28,13 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5431:5432"
+
+  discord_bot:
+    build: .
+    command: python discord_bot/bot.py
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+    depends_on:
+      - db
 volumes:
   pgdata: {}
