@@ -2,6 +2,8 @@ import discord
 import os
 import requests
 from discord.ext import commands
+from discord import Embed
+import json
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 
@@ -45,23 +47,39 @@ async def on_member_join(member):
 #     # print(f"erreur lors de l'enregistrement: {response.status_code}")
 
 
+
+
+
+@client.command()
+async def get_all_members_count(ctx):
+    guild = ctx.guild
+    members_count = len(guild.members)
+    await ctx.send(f"il y a {members_count} users sur ce discord")
+      
+
 @client.command()
 async def get_member(ctx, member_id: int):
-    guild = ctx.guild
+    guild = ctx.guild  
     member = guild.get_member(member_id)
     if member:
-        await ctx.send(f"username: {member.name}, avatar: {member.display_avatar.url}")
-    else: 
-        await ctx.send("member not found")
-
+        member_info = {
+            "id": member.id,
+            "name": member.name,
+            "display_name": member.display_name,
+            "avatar_url": str(member.display_avatar.url),
+            "joined_at": member.joined_at.isoformat() if member.joined_at else None
+        }
+        print(json.dumps(member_info, indent=4))
+    else:
+        print("Membre non trouvé.")
 
 @client.command()
-async def get_all_members_command(ctx):
+async def print_get_all_members(ctx):
     guild = ctx.guild
     members_info = await get_all_members(guild)
-    
-    for member in members_info:
-        await ctx.send(f"username: {member['name']}, avatar: {member['avatar_url']}")
+    print(json.dumps(members_info, indent=4))
+
+
 
 async def get_all_members(guild):
     members = guild.members
