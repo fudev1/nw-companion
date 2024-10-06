@@ -79,7 +79,15 @@ async def print_get_all_members(ctx):
     members_info = await get_all_members(guild)
     print(json.dumps(members_info, indent=4))
 
-
+@client.command()
+async def print_member_object(ctx, member_id:int):
+    guild = ctx.guild
+    member = guild.get_member(member_id)
+    if member:
+        print(dir(member))
+        await ctx.send("Les attributs de l'objet membre ont été affichés dans la console.")
+    else: 
+        await ctx.send("Membre non trouvé.")
 
 async def get_all_members(guild):
     members = guild.members
