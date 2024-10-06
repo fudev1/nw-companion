@@ -8,6 +8,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 # intents (nécessaire pour que le bot fonctionne)
 intents = discord.Intents.default()
 intents.members = True # récupére les infos sur les membres
+intents.message_content = True # permet au bot de lire les messages de commande
 
 # instance du client Discord
 # client = discord.Client(intents=intents)
@@ -27,7 +28,8 @@ async def on_member_join(member):
     print(f'discriminator: {member.discriminator}')
     if member.avatar is not None: 
         print(f'avatar URL: {member.display_avatar.url}')
-    print("pas d'avatar personnalisé, avatar par défaut de Discord utilisé")
+    else: 
+        print("pas d'avatar personnalisé, avatar par défaut de Discord utilisé")
 
 #     # user_data = {
 #     #     'discord_id': member.id,
@@ -49,7 +51,8 @@ async def get_member(ctx, member_id: int):
     member = guild.get_member(member_id)
     if member:
         await ctx.send(f"username: {member.name}, avatar: {member.display_avatar.url}")
-    await ctx.send("member not found")
+    else: 
+        await ctx.send("member not found")
 
 
 @client.command()
