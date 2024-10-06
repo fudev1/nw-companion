@@ -23,7 +23,9 @@ async def on_member_join(member):
     print(f'ID: {member.id}')
     print(f'username: {member.name}')
     print(f'discriminator: {member.discriminator}')
-    print(f'avatar URL: {member.avatar_url}')
+    if member.avatar is not None: 
+        print(f'avatar URL: {member.avatar.url}')
+    print("pas d'avatar personnalisé, avatar par défaut de Discord utilisé")
 
 #     # user_data = {
 #     #     'discord_id': member.id,
