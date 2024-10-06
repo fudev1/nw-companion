@@ -31,6 +31,8 @@ services:
 
   discord_bot:
     build: .
+    volumes:
+      - .:/workspaces
     command: python discord_bot/bot.py
     environment:
       - DISCORD_TOKEN=${DISCORD_TOKEN}

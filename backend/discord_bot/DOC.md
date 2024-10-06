@@ -23,3 +23,15 @@ user_data = {
 
 response = requests.post('http://ton_api_django_url/api/users/', json=user_data)
 ```
+
+# Lister tous les attributs et méthodes d'un objet : 
+
+```python
+@bot.event
+async def on_member_join(member)
+    print(dir(member))
+```
+
+
+# Objet `guild`
+=> Informations des tous les membres `guild.member` ou `guild.get_member()`
