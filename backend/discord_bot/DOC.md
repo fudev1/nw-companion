@@ -35,3 +35,4 @@ async def on_member_join(member)
 
 # Objet `guild`
 => Informations des tous les membres `guild.member` ou `guild.get_member()`
+
