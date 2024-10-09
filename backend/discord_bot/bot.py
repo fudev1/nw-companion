@@ -4,8 +4,18 @@ import requests
 from discord.ext import commands
 from discord import Embed
 import json
+import http.client
+
+http.client.HTTPConnection.debuglevel = 1
+
 
 TOKEN = os.getenv('DISCORD_TOKEN')
+BACKEND_URL = 'http://django-nw-companion:8000'
+
+
+# Identifiants du bot pour obtenir un JWT
+BOT_USERNAME = os.getenv('BOT_USERNAME')
+BOT_PASSWORD = os.getenv('BOT_PASSWORD')
 
 # intents (nécessaire pour que le bot fonctionne)
 intents = discord.Intents.default()
@@ -16,10 +26,31 @@ intents.message_content = True # permet au bot de lire les messages de commande
 # client = discord.Client(intents=intents)
 client = commands.Bot(command_prefix='!', intents=intents)
 
+
+
+# Obtenir un token JWT
+def get_jwt_token():
+    data = {
+        'username': BOT_USERNAME,
+        'password': BOT_PASSWORD
+    }
+    print("Données envoyées pour obtenir le token JWT:", data)
+    
+    response = requests.post(f"{BACKEND_URL}/token/", data=data)
+    if response.status_code == 200:
+        return response.json().get('access')
+    else:
+        print("erreur lors de l'obtention du token", response.status_code, response.text)
+        return None
+
+
+
 # event qui se déclenche quand le bot est prêt
 @client.event
 async def on_ready():
     print(f'Connecté en tant que {client.user}')
+    print(f"BOT_USERNAME: {BOT_USERNAME}")
+    print(f"BOT_PASSWORD: {BOT_PASSWORD}")
 
 
 @client.event
@@ -40,7 +71,7 @@ async def on_member_join(member):
 #     #     'avatar_url': str(member.avatar_url),
 #     # }
 
-#     # response = requests.post('http://localhost:8000/api/members', json=user_data)
+#     # response = requests.post('http://django-nw-companion:8000/api/members/', json=user_data)
 
 #     # if response.status_code == 201:
 #     #     print(f"User {member.name} enregistré avec succès")
@@ -56,29 +87,47 @@ async def get_all_members_count(ctx):
     members_count = len(guild.members)
     await ctx.send(f"il y a {members_count} users sur ce discord")
       
-
+# print JSON (membre)
 @client.command()
 async def get_member(ctx, member_id: int):
-    guild = ctx.guild  
+    guild = ctx.guild  # Obtient la guilde actuelle (serveur)
     member = guild.get_member(member_id)
     if member:
         member_info = {
-            "id": member.id,
-            "name": member.name,
+            "discord_id": member.id,
+            "discord_username": member.name,
+            "discriminator": member.discriminator,
             "display_name": member.display_name,
             "avatar_url": str(member.display_avatar.url),
             "joined_at": member.joined_at.isoformat() if member.joined_at else None
         }
         print(json.dumps(member_info, indent=4))
-    else:
-        print("Membre non trouvé.")
+        jwt_token = get_jwt_token()
 
+        
+
+        if jwt_token:
+            print("Données envoyées:", json.dumps(member_info, indent=4))
+            response = requests.post('http://django-nw-companion:8000/api/members/', headers={'Authorization': f'Bearer {jwt_token}'}, json=member_info)
+            if response.status_code == 201:
+                await ctx.send(f"Informations de l'utilisateur {member.name} envoyées au backend avec succès.")
+            else:
+                await ctx.send(f"Erreur lors de l'envoi des informations: {response.status_code} - {response.text}")
+                print(f"Erreur lors de l'envoi des informations: {response.status_code} - {response.text}")
+        else:
+            await ctx.send("Erreur lors de l'obtention du token JWT.")
+    else:
+        await ctx.send("Membre non trouvé.")
+
+
+# print JSON (all membre)
 @client.command()
 async def print_get_all_members(ctx):
     guild = ctx.guild
     members_info = await get_all_members(guild)
     print(json.dumps(members_info, indent=4))
 
+# print tous les attributs de l'object d'un membre
 @client.command()
 async def print_member_object(ctx, member_id:int):
     guild = ctx.guild
