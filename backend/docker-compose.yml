@@ -36,6 +36,8 @@ services:
     command: python discord_bot/bot.py
     environment:
       - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - BOT_USERNAME=${BOT_USERNAME}
+      - BOT_PASSWORD=${BOT_PASSWORD}
     depends_on:
       - db
 volumes:
