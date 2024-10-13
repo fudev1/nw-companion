@@ -71,14 +71,11 @@ async def on_member_join(member):
 #     #     'avatar_url': str(member.avatar_url),
 #     # }
 
-#     # response = requests.post('http://django-nw-companion:8000/api/members/', json=user_data)
+#     # response = requests.post('{BACKEND_URL}/api/members/', json=user_data)
 
 #     # if response.status_code == 201:
 #     #     print(f"User {member.name} enregistré avec succès")
 #     # print(f"erreur lors de l'enregistrement: {response.status_code}")
-
-
-
 
 
 @client.command()
@@ -87,10 +84,11 @@ async def get_all_members_count(ctx):
     members_count = len(guild.members)
     await ctx.send(f"il y a {members_count} users sur ce discord")
       
-# print JSON (membre)
+
+
 @client.command()
 async def get_member(ctx, member_id: int):
-    guild = ctx.guild  # Obtient la guilde actuelle (serveur)
+    guild = ctx.guild 
     member = guild.get_member(member_id)
     if member:
         member_info = {
@@ -104,18 +102,18 @@ async def get_member(ctx, member_id: int):
         print(json.dumps(member_info, indent=4))
         jwt_token = get_jwt_token()
 
-        
-
         if jwt_token:
+            # Info coté docker cli
             print("Données envoyées:", json.dumps(member_info, indent=4))
-            response = requests.post('http://django-nw-companion:8000/api/members/', headers={'Authorization': f'Bearer {jwt_token}'}, json=member_info)
+ 
+            response = requests.post('{BACKEND_URL}/api/members/', headers={'Authorization': f'Bearer {jwt_token}'}, json=member_info)
             if response.status_code == 201:
-                await ctx.send(f"Informations de l'utilisateur {member.name} envoyées au backend avec succès.")
+                await ctx.send(f"Informations de l'utilisateur {member.name} envoyées au backend avec succès.") # DISCORD
             else:
                 await ctx.send(f"Erreur lors de l'envoi des informations: {response.status_code} - {response.text}")
                 print(f"Erreur lors de l'envoi des informations: {response.status_code} - {response.text}")
         else:
-            await ctx.send("Erreur lors de l'obtention du token JWT.")
+            await ctx.send("Erreur: Le bot n'a pas eu l'obtention du token JWT.")
     else:
         await ctx.send("Membre non trouvé.")
 
