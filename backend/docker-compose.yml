@@ -40,5 +40,6 @@ services:
       - BOT_PASSWORD=${BOT_PASSWORD}
     depends_on:
       - db
+
 volumes:
   pgdata: {}
