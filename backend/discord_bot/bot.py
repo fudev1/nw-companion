@@ -80,10 +80,11 @@ async def on_member_join(member):
 
 @client.command()
 async def get_all_members_count(ctx):
+    
     guild = ctx.guild
     members_count = len(guild.members)
     await ctx.send(f"il y a {members_count} users sur ce discord")
-      
+
 
 
 @client.command()
@@ -106,7 +107,7 @@ async def get_member(ctx, member_id: int):
             # Info coté docker cli
             print("Données envoyées:", json.dumps(member_info, indent=4))
  
-            response = requests.post('{BACKEND_URL}/api/members/', headers={'Authorization': f'Bearer {jwt_token}'}, json=member_info)
+            response = requests.post('http://django-nw-companion:8000/api/members/', headers={'Authorization': f'Bearer {jwt_token}'}, json=member_info)
             if response.status_code == 201:
                 await ctx.send(f"Informations de l'utilisateur {member.name} envoyées au backend avec succès.") # DISCORD
             else:
@@ -118,7 +119,9 @@ async def get_member(ctx, member_id: int):
         await ctx.send("Membre non trouvé.")
 
 
+
 # print JSON (all membre)
+
 @client.command()
 async def print_get_all_members(ctx):
     guild = ctx.guild
