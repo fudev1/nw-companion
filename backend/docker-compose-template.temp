@@ -1,0 +1,9 @@
+network:
+  spotifaie
+
+name: 
+  nom_afficher_sur_docker
+
+services:
+  db:
+    container_name: nom_du_container
