@@ -1,12 +1,13 @@
+name: nw-companion
 
 services:
   django:
-    container_name: django-nw-companion
+    container_name: django_api
     build:
-      context: .
+      context: ./django_api
       dockerfile: Dockerfile
     volumes:
-      - .:/workspaces
+      - ./django_api:/workspaces/django_api
     command: sleep infinity
     ports:
       - "8000:8000"
@@ -17,8 +18,8 @@ services:
       - DATABASE_URL=${DATABASE_URL}
 
   db:
-    container_name: pg-nw-companion
-    image: postgres:latest
+    container_name: postgres
+    image: postgres:13.16-bookworm
     restart: unless-stopped
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -26,7 +27,41 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_HOST: ${DB_HOST}
     ports:
-      - "5432:5432"
+      - "5431:5432"
+
+  discord_bot:
+    container_name: discord_bot
+    build: ./discord_bot
+    volumes:
+      - ./discord_bot:/workspaces/discord_bot
+    command: python bot.py
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - BOT_USERNAME=${BOT_USERNAME}
+      - BOT_PASSWORD=${BOT_PASSWORD}
+    depends_on:
+      - db
+
+  # front:
+  #   build: .
+  #   depends_on:
+  #     - db
+  #     - back
+  
+  proxy:
+    contaner_name: nginx 
+    image: nginx
+    ports: 
+      - "80:80"
+
+  adminer:
+    container_name: adminer 
+    image: adminer
+    # restart: always
+    ports: 
+      - 8081:8080
+
 volumes:
   pgdata: {}
