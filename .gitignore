@@ -1,1 +1,4 @@
 .env
+django_api/**/migrations/
+django_api/**/migrations/*.py
+**/__pycache__/
