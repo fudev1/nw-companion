@@ -14,6 +14,7 @@ services:
     restart: unless-stopped
     networks:
       - nwcompanion-network
+      - vps-network
     environment:
       - DJANGO_POSTGRES_DB=${DJANGO_POSTGRES_DB}
       - DJANGO_POSTGRES_USER=${DJANGO_POSTGRES_USER}
