@@ -1,9 +1,0 @@
-[
-    {"model": "auth.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$870000$GFgf9nUPQvubouFi2aiyfR$oGzHkYX/T4H9bIut037ImTTNQE+H0zjptE6VKIDP/K4=", "last_login": "2024-09-24T10:13:18.325Z", "is_superuser": true, "username": "admin", "first_name": "", "last_name": "", "email": "", "is_staff": true, "is_active": true, "date_joined": "2024-09-24T10:13:08.731Z", "groups": [], "user_permissions": []}},
-    {"model": "members.role", "pk": 1, "fields": {"name": "Management", "type": "discord"}},
-    {"model": "members.role", "pk": 2, "fields": {"name": "Healer", "type": "game"}},
-    {"model": "members.role", "pk": 3, "fields": {"name": "Bruiser", "type": "game"}},
-    {"model": "members.role", "pk": 4, "fields": {"name": "Settler", "type": "discord"}},
-    {"model": "members.role", "pk": 5, "fields": {"name": "Range", "type": "game"}},
-    {"model": "members.role", "pk": 6, "fields": {"name": "Support", "type": "game"}}
-]

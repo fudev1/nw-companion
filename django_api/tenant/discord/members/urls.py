@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from discord.members.views import MemberProfileViewSet
+from tenant.discord.members.views import MemberProfileViewSet
 
 router = DefaultRouter()
 router.register(r'', MemberProfileViewSet)

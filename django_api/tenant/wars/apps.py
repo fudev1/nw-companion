@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class RolesConfig(AppConfig):
+class WarsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'discord.roles'
-    label = 'roles'
+    name = 'tenant.wars'
+    label = 'wars'

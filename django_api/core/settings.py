@@ -47,15 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'discord.members',
-    'discord.roles',
-    'new_world.characters',
-    'new_world.wars',
+    'tenant.discord.members',
+    'tenant.discord.roles',
+    'tenant.characters',
+    'tenant.wars',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,6 +75,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -91,7 +93,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': os.getenv('DJANGO_POSTGRES_DB'),
         'USER': os.getenv('DJANGO_POSTGRES_USER'),
         'PASSWORD': os.getenv('DJANGO_POSTGRES_PASSWORD'),
@@ -99,6 +101,12 @@ DATABASES = {
         'PORT': os.getenv('DJANGO_POSTGRES_PORT'),
     }
 }
+
+# The correct apps can be synced, depending on what's being synced (shared or tenant)
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 
 REST_FRAMEWORK = {
