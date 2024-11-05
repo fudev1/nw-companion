@@ -3,4 +3,7 @@ from tenant_users.tenants.models import UserProfile
 
 # Create your models here.
 class TenantUser(UserProfile):
-    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField()
+   

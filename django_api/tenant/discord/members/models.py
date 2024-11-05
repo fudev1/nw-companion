@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class MemberProfile(models.Model):
     """ profil d'un membre lié à l'utilisateur Django et au Discord """
-    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     discord_id = models.CharField(max_length=50, unique=True)
     discord_username = models.CharField(max_length=100)
     display_name = models.CharField(max_length=100)

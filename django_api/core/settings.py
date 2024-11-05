@@ -40,20 +40,43 @@ ALLOWED_HOSTS = ["django-nw-companion", "localhost"]
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+
+    'django_tenants',
+    'tenant_users.permissions',
+    'tenant_users.tenants',
+    'shared.tenancy',
+    'shared.users',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+   
+    'rest_framework',
+    'rest_framework_simplejwt',
+]
+
+TENANT_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'tenant_users.permissions',
     'tenant.discord.members',
     'tenant.discord.roles',
     'tenant.characters',
     'tenant.wars',
-    'rest_framework',
-    'rest_framework_simplejwt',
 ]
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_MODEL = 'tenancy.Company'
+TENANT_DOMAIN_MODEL = 'tenancy.Domain'
+
+AUTHENTICATION_BACKENDS = ("tenant_users.permissions.backend.UserBackend",)
+TENANT_USERS_DOMAIN = "localhost"
+AUTH_USER_MODEL = "users.TenantUser"
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -62,6 +85,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'tenant_users.tenants.middleware.TenantAccessMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
