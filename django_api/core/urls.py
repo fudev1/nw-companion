@@ -23,12 +23,20 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 
 router = routers.DefaultRouter()
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('api-auth/', include('rest_framework.urls')),
-    path('api/members/', include('tenant.discord.members.urls')),
-    path('api/members/roles', include('tenant.discord.roles.urls')),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     # path('api-auth/', include('rest_framework.urls')),
+#     path('api/members/', include('tenant.discord.members.urls')),
+#     path('api/members/roles', include('tenant.discord.roles.urls')),
+#     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+#     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
+# ]
+
+
+urlpatterns = [ 
+    path('admin/', admin.site.urls),
+    path('api/users', include('shared.users.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
 ]

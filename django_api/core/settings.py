@@ -54,6 +54,7 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
    
     'rest_framework',
     'rest_framework_simplejwt',
@@ -78,6 +79,10 @@ AUTHENTICATION_BACKENDS = ("tenant_users.permissions.backend.UserBackend",)
 TENANT_USERS_DOMAIN = "localhost"
 AUTH_USER_MODEL = "users.TenantUser"
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -88,6 +93,7 @@ MIDDLEWARE = [
     'tenant_users.tenants.middleware.TenantAccessMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

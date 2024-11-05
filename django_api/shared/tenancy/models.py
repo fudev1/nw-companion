@@ -11,7 +11,6 @@ class Company(TenantBase):
     owner = models.ForeignKey(TenantUser, on_delete=models.CASCADE, related_name="owned_tenants")
     server = models.CharField(null=True, blank=True)
     faction = models.CharField(null=True, blank=True)
-    created_on = models.DateField(auto_now_add=True)
     paid_until = models.DateField(null=True, blank=True)
     basic_plan = models.BooleanField(default=True)
 
@@ -24,6 +23,9 @@ class Company(TenantBase):
 
     def __str__(self):
         return self.schema_name
+    
+
+
 
 
 class Domain(DomainMixin):
