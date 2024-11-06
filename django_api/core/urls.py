@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+# from django_tenants.utils import get_tenant_model, get_public_schema_name
+# from django.conf import settings
+
 
 
 
@@ -36,7 +39,11 @@ router = routers.DefaultRouter()
 
 urlpatterns = [ 
     path('admin/', admin.site.urls),
-    path('api/users', include('shared.users.urls')),
+    path('api/users/', include('shared.users.urls')),
+    path('api/', include('shared.tenancy.urls')),
+    path('api/members', include('tenant.discord.members.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+

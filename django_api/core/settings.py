@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-z&rp*22j8ytmh1!^(id18dz7=-27@ilrz&%mb73=4bk12sp)$-'
 DEBUG = True
-ALLOWED_HOSTS = ["django-nw-companion", "localhost"]
+# ALLOWED_HOSTS = ["localhost"]
 
 
 # Application definition
@@ -74,14 +74,14 @@ INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in S
 
 TENANT_MODEL = 'tenancy.Company'
 TENANT_DOMAIN_MODEL = 'tenancy.Domain'
+PUBLIC_SCHEMA_NAME = 'public'
 
 AUTHENTICATION_BACKENDS = ("tenant_users.permissions.backend.UserBackend",)
 TENANT_USERS_DOMAIN = "localhost"
 AUTH_USER_MODEL = "users.TenantUser"
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -94,6 +94,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'tenant.middleware.TenantSchemaMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
