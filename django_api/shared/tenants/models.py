@@ -2,15 +2,15 @@ from django.db import models
 from django_tenants.models import TenantMixin, DomainMixin
 from tenant_users.tenants.models import TenantBase
 from shared.users.models import TenantUser
-
+from django_tenants.utils import get_tenant_type_choices
 
 # Create your models here.
 
-class Company(TenantBase):
+class Tenant(TenantBase):
+    game_type = models.CharField(max_length=100, choices=get_tenant_type_choices())
     name = models.CharField(max_length=255, unique=True)
     owner = models.ForeignKey(TenantUser, on_delete=models.CASCADE, related_name="owned_tenants")
-    server = models.CharField(null=True, blank=True)
-    faction = models.CharField(null=True, blank=True)
+
     paid_until = models.DateField(null=True, blank=True)
     basic_plan = models.BooleanField(default=True)
 
@@ -25,11 +25,5 @@ class Company(TenantBase):
         return self.schema_name
     
 
-
-
-
 class Domain(DomainMixin):
     pass
-
-
-

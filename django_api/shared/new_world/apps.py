@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class MembersConfig(AppConfig):
+class NewWorldConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tenant.discord.members'
-    label = 'members'
+    name = 'shared.new_world'
+    label = 'new_world'

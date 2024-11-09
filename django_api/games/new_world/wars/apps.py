@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class TenancyConfig(AppConfig):
+class WarsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'shared.tenancy'
-    label = 'tenancy'
+    name = 'games.new_world.wars'
+    label = 'wars'

@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from .serializers import TenantUserSerializer
 from .models import TenantUser
 
@@ -9,15 +9,15 @@ class TenantUserViewSet(viewsets.ModelViewSet):
     serializer_class = TenantUserSerializer
 
 
-    #todo: créer une fonction pour la création d'un utilisateur qui comprend les méthode suivantes : 
-    def perform_create(self, serializer):
-        user: TenantUser = serializer.save()
+    # #todo: créer une fonction pour la création d'un utilisateur qui comprend les méthode suivantes : 
+    # def perform_create(self, serializer):
+    #     user: TenantUser = serializer.save()
 
-        pass
+    #     pass
 
-        #todo: Générer un code à 4 chiffres
+    #     #todo: Générer un code à 4 chiffres
 
-        #todo: Mettre en cache le code pendant 2 minutes
+    #     #todo: Mettre en cache le code pendant 2 minutes
 
-        #todo: Envoyer un email avec le code de vérification
+    #     #todo: Envoyer un email avec le code de vérification
 

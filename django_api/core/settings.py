@@ -40,40 +40,82 @@ DEBUG = True
 
 # Application definition
 
-SHARED_APPS = [
+HAS_MULTI_TYPE_TENANTS = True
+MULTI_TYPE_DATABASE_FIELD = 'game_type'
 
-    'django_tenants',
-    'tenant_users.permissions',
-    'tenant_users.tenants',
-    'shared.tenancy',
-    'shared.users',
+TENANT_TYPES = {
+    # TENANT PUBLIC 
+    "public": {
+        "APPS": [
+            # Apps
+            'django_tenants',
+            'tenant_users.permissions',
+            'tenant_users.tenants',
+            'shared.users',
+            'shared.tenants',
 
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'corsheaders',
-   
-    'rest_framework',
-    'rest_framework_simplejwt',
-]
+            # Django apps par défaut
+            'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            'corsheaders',
 
-TENANT_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'tenant_users.permissions',
-    'tenant.discord.members',
-    'tenant.discord.roles',
-    'tenant.characters',
-    'tenant.wars',
-]
+            # Apps partagées
+            'rest_framework',
+            'rest_framework_simplejwt',
+        ],
+        "URLCONF": "core.urls",
+    },
 
-INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+    # TENANT NEW_WORLD
+    "new_world": {
+        "APPS": [
+            'django.contrib.contenttypes',
+            'django.contrib.auth',
+            'tenant_users.permissions',
 
-TENANT_MODEL = 'tenancy.Company'
-TENANT_DOMAIN_MODEL = 'tenancy.Domain'
+            'shared.new_world',
+            'games.discord.members',
+            'games.discord.roles',
+            'games.new_world.characters',
+            'games.new_world.wars',
+            
+
+            'django.contrib.sessions',
+            'django.contrib.messages',
+        ],
+        "URLCONF": "games.new_world.urls",
+    },
+
+    # TEMPLATE AUTRE TENANT
+    # "nom_game_type": {
+    #     "APPS": [
+    #         'django.contrib.contenttypes',
+    #         'django.contrib.auth',
+    #         'tenant_users.permissions',
+
+    #         # LISTE DES APPS DU JEU
+    #         # ....
+
+    #         'django.contrib.sessions',
+    #         'django.contrib.messages',
+    #     ],
+    #     "URLCONF": "games.nom_game_type.urls"
+    # },
+}
+
+INSTALLED_APPS = []
+
+for schema in TENANT_TYPES:
+    INSTALLED_APPS += [app for app in TENANT_TYPES[schema]["APPS"] if app not in INSTALLED_APPS]
+
+ROOT_URLCONF = ''
+
+TENANT_MODEL = 'tenants.Tenant'
+TENANT_DOMAIN_MODEL = 'tenants.Domain'
 PUBLIC_SCHEMA_NAME = 'public'
 
 AUTHENTICATION_BACKENDS = ("tenant_users.permissions.backend.UserBackend",)
@@ -94,10 +136,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'tenant.middleware.TenantSchemaMiddleware',
+    'games.middleware.TenantSchemaMiddleware',
 ]
 
-ROOT_URLCONF = 'core.urls'
+
 
 TEMPLATES = [
     {

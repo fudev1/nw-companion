@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from shared.tenancy.models import Company, Domain
+from shared.tenants.models import Tenant, Domain
 
 class TenantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Company
+        model = Tenant
         fields = '__all__'
 
 class DomainSerializer(serializers.ModelSerializer):

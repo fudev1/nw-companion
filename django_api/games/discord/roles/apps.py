@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class RolesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tenant.discord.roles'
+    name = 'games.discord.roles'
     label = 'roles'

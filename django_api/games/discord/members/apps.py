@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class WarsConfig(AppConfig):
+class MembersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tenant.wars'
-    label = 'wars'
+    name = 'games.discord.members'
+    label = 'members'
