@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from shared.tenants import views
+# from shared.tenants.views import ProvisionCompany
 
 
 # Router pour les tenants (compagnies)
@@ -23,4 +24,5 @@ router.register(r'', views.TenantViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    # path('provision_nwcompany/', ProvisionCompany.as_view(), name='provision_nwcompany'),
 ]

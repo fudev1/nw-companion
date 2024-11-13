@@ -13,7 +13,8 @@ class TenantUserSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = TenantUser
-        fields = ['last_name', 'first_name', 'email', 'password']
+        fields = '__all__'
+        extra_kwargs = {'password': {'write_only': True}}
 
     @transaction.atomic
     def create(self, validated_data): 

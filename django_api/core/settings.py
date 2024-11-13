@@ -51,8 +51,10 @@ TENANT_TYPES = {
             'django_tenants',
             'tenant_users.permissions',
             'tenant_users.tenants',
+
             'shared.users',
             'shared.tenants',
+            'shared.new_world',
 
             # Django apps par défaut
             'django.contrib.admin',
@@ -61,11 +63,11 @@ TENANT_TYPES = {
             'django.contrib.sessions',
             'django.contrib.messages',
             'django.contrib.staticfiles',
-            'corsheaders',
-
+            
             # Apps partagées
             'rest_framework',
             'rest_framework_simplejwt',
+            'corsheaders',
         ],
         "URLCONF": "core.urls",
     },
@@ -82,12 +84,11 @@ TENANT_TYPES = {
             'games.discord.roles',
             'games.new_world.characters',
             'games.new_world.wars',
-            
 
             'django.contrib.sessions',
             'django.contrib.messages',
         ],
-        "URLCONF": "games.new_world.urls",
+        "URLCONF": "games.urls",
     },
 
     # TEMPLATE AUTRE TENANT

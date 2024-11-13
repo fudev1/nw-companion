@@ -8,5 +8,5 @@ class NwCompany(Tenant):
     faction = models.CharField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name} ({self.server})'
+        return f'{self.name} ({self.server} - {self.faction})'
 
