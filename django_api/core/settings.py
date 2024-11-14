@@ -79,7 +79,7 @@ TENANT_TYPES = {
             'django.contrib.auth',
             'tenant_users.permissions',
 
-            'shared.new_world',
+            # 'shared.new_world',
             'games.discord.members',
             'games.discord.roles',
             'games.new_world.characters',
