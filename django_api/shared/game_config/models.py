@@ -5,9 +5,9 @@ from django.db import models
 class Game(models.Model):
     name = models.CharField(max_length=100)
 
-class Server(Game):
+class Server(models.Model):
     name = models.CharField(max_length=100)
 
-class Faction(Game):
+class Faction(models.Model):
     name = models.CharField(max_length=100)
     
