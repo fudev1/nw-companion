@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../core/components/navbar/navbar.component';
+import { HeaderComponent } from '../../layout/main-layout/header/header.component';
+import { HeroComponent } from '../../layout/main-layout/hero/hero.component';
+import { FooterComponent } from '../../layout/main-layout/footer/footer.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-public-home',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [HeaderComponent, HeroComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
