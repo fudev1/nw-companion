@@ -16,3 +16,31 @@ Scalabilité : Si ton projet devient grand et que tu as beaucoup de composants r
 Avantage : C'est une solution simple, qui peut être suffisante si tu as peu de composants réutilisables. Tu peux simplement placer les composants dans un dossier /shared (ou /core), et les importer individuellement là où tu en as besoin
 
 Limitation : Le principal inconvénient ici est la répétition. Si tu dois importer des composants dans de nombreux modules, tu devras les déclarer individuellement à chaque fois, ce qui peut rendre le code verbeux et potentiellement moins organisé à mesure que le projet grandit.
+
+
+| /src
+|__ /app
+|____   /core
+|________   /services
+|________   /components
+|________   /directives
+|________   /pipes
+|________   /guards
+|________   /resolvers
+
+|____   /layouts
+|________   /main-layout
+              - header-main
+                - router-outlet 
+              - footer-main
+  
+|________   /tenant-layout
+
+|____   /pages
+|________   /home
+|____________   /components
+|________________   - main-layout
+|________   /new-world
+|________   /throne-liberty
+|________   /pricing
+|________   /about

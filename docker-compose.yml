@@ -22,17 +22,17 @@ services:
       - DJANGO_POSTGRES_HOST=${DJANGO_POSTGRES_HOST}
       - DJANGO_POSTGRES_PORT=${DJANGO_POSTGRES_PORT}
 
-  angular:
-    container_name : angular_nwcompanion
-    build: ./angular_front
-    volumes:
-      - ./angular_front:/app
-    # command: ng serve --host 0.0.0.0
-    networks:
-      - nwcompanion-network
-      - vps-network 
-    ports:
-      - "4200:4200"
+  # angular:
+  #   container_name : angular_nwcompanion
+  #   build: ./angular_front
+  #   volumes:
+  #     - ./angular_front:/app
+  #   # command: ng serve --host 0.0.0.0
+  #   networks:
+  #     - nwcompanion-network
+  #     - vps-network 
+  #   ports:
+  #     - "4200:4200"
 
   postgres:
     container_name: pg_nwcompanion
