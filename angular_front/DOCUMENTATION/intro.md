@@ -44,3 +44,21 @@ Gestion des Permissions Utilisateurs : Pour le dashboard, tu pourrais ajouter de
 Lazy Feature Modules : Tu pourrais utiliser le lazy loading non seulement pour features/main, mais aussi pour chaque page de jeu (new-world, tl, etc.) pour encore améliorer les performances.
 Ergonomie et UX : Créer un composant Notification dans /shared/ pour gérer les messages utilisateurs (par exemple, succès, erreur, etc.) serait très utile, surtout dans un projet multi-tenant.
 State Management : Utiliser signals ou services pour gérer l'état global, comme l'état de l'authentification, est une bonne pratique. Tu pourrais plus tard envisager des outils comme RxJS ou NgRx si les besoins deviennent plus complexes.
+
+
+
+
+Site Principal :
+
+Navigation avec Logo Guild Manager.
+Liens vers chaque jeu (par exemple New World, Throne & Liberty, etc.).
+Liens généraux (comme Pricing, About, Login/Register).
+Sous-Site de Jeu (par exemple "new-world.guildmanager.app") :
+
+Navigation principale avec Logo Guild Manager, mais ici tu ajoutes un sous-logo spécifique au jeu (ex : New World).
+Menu spécifique au contexte du jeu (ex : Compagnies, Créer une Compagnie, Dernières Guerres, etc.).
+Toujours des liens globaux comme Profil ou possibilité de retourner à l'accueil général.
+Tenant de Jeu (par exemple "ma-compa.new-world.guildmanager.app") :
+
+Navigation adaptée à la compagnie spécifique, avec des options liées à la gestion de la guilde.
+Toujours une continuité avec les options globales comme le bouton Profil, permettant de passer facilement d’un contexte à l’autre.

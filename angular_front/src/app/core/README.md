@@ -18,7 +18,7 @@ core/
     └── tenant-types.ts
 ```
 
-Ce dossier contient les éléments essentiels et singleton de l'application :
+Ce dossier contient les éléments essentiels et singleton de l'application
 - Guards pour la sécurité
 - Interceptors pour la gestion des requêtes
 - Services partagés

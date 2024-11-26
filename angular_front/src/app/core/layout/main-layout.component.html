@@ -1,0 +1,19 @@
+<!-- <app-header></app-header>
+<main>
+    <router-outlet></router-outlet>
+</main>
+<app-footer></app-footer> -->
+
+<ng-container *ngIf="isNewWorldContext; else defaultHeader">
+    <app-new-world-header></app-new-world-header>
+</ng-container>
+
+<ng-template #defaultHeader>
+    <app-header></app-header>
+</ng-template>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>
