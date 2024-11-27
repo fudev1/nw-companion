@@ -3,6 +3,9 @@ import { MainLayoutComponent } from './core/layout/main-layout.component';
 import { MainComponent } from './main/main.component';
 import { NewWorldComponent } from './games/new-world/new-world.component';
 import { PricingComponent } from './main/pricing/pricing.component';
+import { CompanyListComponent } from './games/new-world/company-list/company-list.component';
+import { WarsComponent } from './games/new-world/wars/wars.component';
+import { NewsComponent } from './games/new-world/news/news.component';
 
 export const routes: Routes = [
     {
@@ -10,10 +13,20 @@ export const routes: Routes = [
         component: MainLayoutComponent,
         children: [
             { path: '', component: MainComponent },
-            { path: 'new-world', component: NewWorldComponent},
             { path: 'pricing', component: PricingComponent},
         ]
+    },
+    {
+        path: 'new-world',
+        component: MainLayoutComponent,
+        children: [
+            { path: '', component: NewWorldComponent },
+            { path: 'companies', component: CompanyListComponent },
+            { path: 'wars', component: WarsComponent },
+            { path: 'news', component: NewsComponent },
+        ]
     }
+];
     // {
     //     path: 'home',
     //     loadComponent: () => new Promise(resolve => {
@@ -36,4 +49,4 @@ export const routes: Routes = [
     //     component: NwHomeComponent,
         
     // },
-];
+

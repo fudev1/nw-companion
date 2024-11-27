@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NewWorldHeaderComponent } from '../../games/new-world/header/header.component';
+import { LoginButtonComponent } from "./login-button/login-button.component";
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, NewWorldHeaderComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, NewWorldHeaderComponent, CommonModule ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
