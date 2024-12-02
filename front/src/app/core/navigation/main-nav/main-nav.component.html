@@ -1,0 +1,41 @@
+<nav class="bg-white shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="logo flex items-center pr-5">
+                    <a href="/" class="logo-link text-xl font-bold">GM</a>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:flex items-center space-x-4 navigation">
+                    
+                    @for (item of mainNavItems; track item.path) {
+                        <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">
+                            {{ item.label }}
+                        </a>
+                    }
+
+                </div>
+            </div>
+            
+
+            <!-- Right Navigation -->
+            <div class="hidden md:flex items-center space-x-4 secondary-nav ">
+                
+                @for (item of secondaryNavItems; track item.path) {
+                    <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">
+                        {{ item.label }}
+                    </a>
+                }
+                
+            </div>
+            
+            <app-user-menu />
+            
+        </div>
+    </div>
+    
+
+
+</nav>
