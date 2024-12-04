@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -8,7 +7,6 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-user-menu',
   standalone: true,
   imports: [
-    RouterLink,
     AsyncPipe,
   ],
   templateUrl: './user-menu.component.html',

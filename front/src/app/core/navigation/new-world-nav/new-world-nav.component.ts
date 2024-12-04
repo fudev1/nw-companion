@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UserMenuComponent } from '../../components/user-menu/user-menu.component';
+import { AuthService } from '../../services/auth.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-world-nav',
@@ -8,7 +10,8 @@ import { UserMenuComponent } from '../../components/user-menu/user-menu.componen
   imports: [
     RouterLink,
     RouterLinkActive,
-    UserMenuComponent
+    UserMenuComponent,
+    AsyncPipe,
   ],
   templateUrl: './new-world-nav.component.html',
   styleUrl: './new-world-nav.component.scss'
@@ -22,5 +25,7 @@ export class NewWorldNavComponent {
     { path: '/new-world/news', label: 'News' },
     { path: '/new-world/forum', label: 'Forum' }
   ];
+
+  constructor(public auth: AuthService) { }
 
 }
