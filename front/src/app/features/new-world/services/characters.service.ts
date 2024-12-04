@@ -39,4 +39,11 @@ export class CharactersService {
 
     this.characters.next([...this.characters.value, newCharacter]);
   }
+
+  deleteCharacter(characterId: string): void {
+    const updatedCharacters = this.characters.value.filter(
+      char => char.id !== characterId
+    );
+    this.characters.next(updatedCharacters);
+  }
 }
