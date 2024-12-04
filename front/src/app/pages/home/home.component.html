@@ -1,4 +1,18 @@
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold">Home</h1>
-    <span class="text-xs bg-slate-600 px-2 rounded text-white">home.component works!</span>
+
+
+<app-hero-main />
+
+<app-section-dashboard />
+
+
+<div class="py-16">
+  <div class="container px-4 mx-auto">
+    <h2 class="mb-12 text-3xl font-bold text-center text-slate-100">Supported Games</h2>
+    <div class="grid max-w-4xl grid-cols-1 gap-8 mx-auto md:grid-cols-2">
+      @for (game of games; track game.path) {
+        <app-game-card [game]="game"></app-game-card>
+      }
+    </div>
   </div>
+</div>
+

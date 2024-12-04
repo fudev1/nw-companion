@@ -1,0 +1,12 @@
+<div class="overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-lg hover:shadow-xl" >
+    <div class="flex items-center justify-center h-48 bg-gray-200">
+        <span class="text-slate-300">Game Image</span>
+    </div>
+
+    <div class="p-6">
+        <h3>{{ game.title }}</h3>
+        <p class="">{{ game.description }}</p>
+        <a [routerLink]="game.path" class="">More Info</a>
+    </div>
+
+</div>

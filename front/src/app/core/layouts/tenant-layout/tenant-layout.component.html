@@ -1,9 +1,17 @@
-<main class="container mx-auto px-4 py8">
-    <p class="bg-slate-600 px-2 text-white rounded">tenant-layout works!</p>
 
-    <!-- intégrer la navigation principale -->
+<div 
+    class="min-h-screen bg-slate-500"
+    [ngClass]="{
+        'theme-covenant': company?.faction === 'covenant',
+        'theme-marauder': company?.faction === 'marauder',
+        'theme-syndicate': company?.faction === 'syndicate'
+    }">
     
 
-    <!-- routage de la navigation principale -->
-    <router-outlet/>
-<main>
+    <app-tenant-nav [company]="company" />
+
+    <main class="container px-4 py-8 mx-auto">
+        <router-outlet></router-outlet>
+    </main>
+    
+</div>

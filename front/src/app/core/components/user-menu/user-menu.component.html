@@ -1,17 +1,17 @@
-<div class="user-nav relative">
+<div class="relative user-nav">
 
     @if (auth.currentUser$ | async; as user) {
-        <button (click)="toggleMenu()" class="flex items-center space-x-2 px-4 py-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">
+        <button (click)="toggleMenu()" class="flex items-center px-4 py-2 space-x-2 text-slate-300 bg-[#5865F2] rounded-md hover:bg-[#3d46ac]">
             <img [src]="user.avatar" [alt]="user.username" class="w-6 h-6 rounded-full" />
             <span>{{ user.username }}</span>
         </button>
 
         @if (isMenuOpen) {
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+            <div class="absolute right-0 z-50 w-48 py-1 mt-2 bg-white rounded-md shadow-lg">
                 <a routerLink="/characters" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Characters</a>
                 <a routerLink="/guild" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Guild</a>
                 <hr class="my-1">
-                <button (click)="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
+                <button (click)="logout()" class="w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">Logout</button>
             </div>
         }
 

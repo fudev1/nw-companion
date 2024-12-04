@@ -4,3 +4,33 @@
 
 @import "primeng/resources/themes/lara-light-blue/theme.css"; 
 @import "primeng/resources/primeng.css";
+
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+
+/* Theme Variables */
+:root {
+  --primary-color: theme('colors.gm.primary');
+  --secondary-color: theme('colors.gm.secondary');
+}
+
+/* New World Theme */
+.theme-new-world {
+  --primary-color: theme('colors.new-world.primary');
+  --secondary-color: theme('colors.new-world.secondary');
+}
+
+/* Faction Themes */
+.theme-covenant {
+  --primary-color: theme('colors.faction.covenant');
+}
+
+.theme-marauder {
+  --primary-color: theme('colors.faction.marauder');
+}
+
+.theme-syndicate {
+  --primary-color: theme('colors.faction.syndicate');
+}

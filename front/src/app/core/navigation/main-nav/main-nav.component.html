@@ -1,17 +1,17 @@
-<nav class="bg-white shadow-lg">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex justify-between items-center">
+<nav class="main-nav">
+    <div class="container px-4 mx-auto">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <div class="logo flex items-center pr-5">
-                    <a href="/" class="logo-link text-xl font-bold">GM</a>
+                <div class="flex items-center pr-5 logo">
+                    <a href="/" class="text-xl font-bold logo-link">GM</a>
                 </div>
 
                 <!-- Main Navigation -->
-                <div class="hidden md:flex items-center space-x-4 navigation">
+                <div class="items-center hidden space-x-4 md:flex navigation">
                     
                     @for (item of mainNavItems; track item.path) {
-                        <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">
+                        <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 text-sm font-medium rounded-md text-slate-300 hover:text-gray-900 hover:bg-slate-200">
                             {{ item.label }}
                         </a>
                     }
@@ -21,10 +21,10 @@
             
 
             <!-- Right Navigation -->
-            <div class="hidden md:flex items-center space-x-4 secondary-nav ">
+            <div class="items-center hidden space-x-4 md:flex secondary-nav ">
                 
                 @for (item of secondaryNavItems; track item.path) {
-                    <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">
+                    <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 text-sm font-medium rounded-md text-slate-300 hover:text-gray-900 hover:bg-slate-200">
                         {{ item.label }}
                     </a>
                 }
