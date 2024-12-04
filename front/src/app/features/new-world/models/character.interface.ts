@@ -1,7 +1,7 @@
 export interface Character {
     id: string;
     name: string;
-    role: 'Tank' | 'Healer' | 'Support' | 'Bruiser' | 'Melee Dex' | 'Ranged Dex';
+    role: 'Tank' | 'Healer' | 'Support' | 'Bruiser' | 'Melee Dex' | 'Ranged Dex' | 'undefined';
     faction?: 'covenant' | 'marauder' | 'syndicate';
     primaryWeapon: string;
     secondaryWeapon: string;
@@ -30,5 +30,5 @@ export const ROLES = [
     'Support',
     'Bruiser',
     'Melee Dex',
-    'Ranged Dex'
+    'Ranged Dex',
 ] as const;
