@@ -33,7 +33,11 @@ export const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'about', component: AboutComponent},
             { path: 'contact', component: ContactComponent},
-            { path: 'characters', component: UserNwCharactersComponent },
+            { 
+                path: 'characters', 
+                component: UserNwCharactersComponent, 
+                canActivate: [authGuard] 
+            },
             { path: 'guild', component: UserNwGuildComponent }
         ]
     },

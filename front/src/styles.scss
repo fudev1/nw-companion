@@ -1,20 +1,62 @@
-@import "../node_modules/tailwindcss/base.css" layer(tailwindcss); 
-@import "../node_modules/tailwindcss/components.css" layer(tailwindcss); 
-@import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss); 
+// @import "../node_modules/tailwindcss/base.css" layer(tailwindcss); 
+// @import "../node_modules/tailwindcss/components.css" layer(tailwindcss); 
+// @import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss); 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import "primeng/resources/themes/lara-light-blue/theme.css"; 
 @import "primeng/resources/primeng.css";
 
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'circular-web';
+    src: url('assets/fonts/circularweb-book.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'general';
+    src: url('assets/fonts/general.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'robert-medium';
+    src: url('assets/fonts/robert-medium.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'robert-regular';
+    src: url('assets/fonts/robert-regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'gmaster';
+    src: url('assets/fonts/gmaster-regular.woff2') format('woff2');
+  }
+
+}
+
+@layer utilities {
+  .font-gmaster {
+    font-family: 'gmaster';
+    font-feature-settings: "ss01" on;
+  }
+}
 
 /* Theme Variables */
 :root {
   --primary-color: theme('colors.gm.primary');
   --secondary-color: theme('colors.gm.secondary');
+  
 }
+
+// html {
+//   font-size: 10px;
+// }
+
+
 
 /* New World Theme */
 .theme-new-world {
@@ -34,3 +76,101 @@
 .theme-syndicate {
   --primary-color: theme('colors.faction.syndicate');
 }
+
+
+// loader animation
+
+.glitch {
+  position: relative;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  letter-spacing: 5px;
+  z-index: 1;
+  animation: shift 1s ease-in-out infinite alternate;
+}
+
+.glitch:before,
+.glitch:after {
+  display: block;
+  content: attr(data-glitch);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.glitch:before {
+  animation: glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: #8b00ff;
+  z-index: -1;
+}
+
+.glitch:after {
+  animation: glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+  color: #00e571;
+  z-index: -2;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-3px, 3px);
+  }
+
+  40% {
+    transform: translate(-3px, -3px);
+  }
+
+  60% {
+    transform: translate(3px, 3px);
+  }
+
+  80% {
+    transform: translate(3px, -3px);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes shift {
+  0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% {
+    transform: skewX(0deg);
+  }
+
+  41% {
+    transform: skewX(10deg);
+  }
+
+  42% {
+    transform: skewX(-10deg);
+  }
+
+  59% {
+    transform: skewX(40deg) skewY(10deg);
+  }
+
+  60% {
+    transform: skewX(-40deg) skewY(-10deg);
+  }
+
+  63% {
+    transform: skewX(10deg) skewY(-5deg);
+  }
+
+  70% {
+    transform: skewX(-50deg) skewY(-20deg);
+  }
+
+  71% {
+    transform: skewX(10deg) skewY(-10deg);
+  }
+}
+
+// loader animation end

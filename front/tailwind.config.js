@@ -19,7 +19,14 @@ module.exports = {
           marauder: '#48bb78',
           syndicate: '#9f7aea',
         }
-      }
+      },
+      fontFamily: {
+        'gmaster': ['gmaster', 'sans-serif'],
+        'circular-web': ['circular-web', 'sans-serif'],
+        'general': ['general', 'sans-serif'],
+        'robert-medium': ['robert-medium', 'sans-serif'],
+        'robert-regular': ['robert-regular', 'sans-serif'],
+      },
     },
   },
   plugins: [],
