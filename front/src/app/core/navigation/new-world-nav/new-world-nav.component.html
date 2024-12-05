@@ -18,7 +18,7 @@
                         <a [routerLink]="item.path" routerLinkActive="text-blue-800" class="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-100">
                             {{ item.label }}
                         </a>
-                    }
+                    } 
 
                     @if (auth.currentUser$ | async) {
                         <a routerLink="/new-world/characters" class="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-100">

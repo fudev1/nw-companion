@@ -19,8 +19,11 @@ export class CharactersComponent implements OnInit {
 
   characters$!: Observable<Character[]>;
   showNewCharacterForm = false;
+  showDeleteConfirm = false;
+  characterToDelete: Character | null = null;
   weapons = WEAPONS;
   roles = ROLES;
+  
 
   newCharacter: Partial<Character> = {
     name: '',
@@ -35,21 +38,26 @@ export class CharactersComponent implements OnInit {
 
   constructor(private charactersService: CharactersService) { }
 
-  createCharacter(): void {
-    if (
+  get isFormValid(): boolean {
+    return !!(
       this.newCharacter.name &&
       this.newCharacter.role &&
       this.newCharacter.primaryWeapon &&
       this.newCharacter.secondaryWeapon
-    ) {
+    );
+  }
+
+  createCharacter(): void {
+    if (this.isFormValid) {
       this.charactersService.createCharacter({
-        name: this.newCharacter.name,
-        role: this.newCharacter.role,
-        primaryWeapon: this.newCharacter.primaryWeapon,
-        secondaryWeapon: this.newCharacter.secondaryWeapon,
+        name: this.newCharacter.name!,
+        role: this.newCharacter.role!,
+        primaryWeapon: this.newCharacter.primaryWeapon!,
+        secondaryWeapon: this.newCharacter.secondaryWeapon!,
       });
 
       this.showNewCharacterForm = false;
+
       this.newCharacter = {
         name: '',
         role: 'undefined',
@@ -59,4 +67,20 @@ export class CharactersComponent implements OnInit {
     }
   }
 
+  confirmDelete(character: Character): void {
+    this.characterToDelete = character;
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete(): void {
+    this.characterToDelete = null;
+    this.showDeleteConfirm = false;
+  }
+
+  deleteCharacter(): void {
+    if (this.characterToDelete) {
+      this.charactersService.deleteCharacter(this.characterToDelete.id);
+      this.cancelDelete();
+    }
+  }
 }
