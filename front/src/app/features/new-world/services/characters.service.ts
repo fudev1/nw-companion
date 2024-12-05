@@ -26,15 +26,17 @@ export class CharactersService {
     );
   }
 
-  createCharacter(character: Omit<Character, 'id' | 'userId' | 'createdAt'>): void {
+  createCharacter(character: Omit<Character, 'id' | 'userId' | 'createdAt' | 'updatedAt'>): void {
     const user = this.auth.currentUser;
     if (!user) return;
+
 
     const newCharacter: Character = {
       ...character,
       id: crypto.randomUUID(),
       userId: user.id,
-      createdAt: new Date()
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     this.characters.next([...this.characters.value, newCharacter]);

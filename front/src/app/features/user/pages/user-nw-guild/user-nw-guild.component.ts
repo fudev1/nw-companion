@@ -27,13 +27,16 @@ export class UserNwGuildComponent implements OnInit {
   weapons = WEAPONS;
   roles = ROLES;
   regions = REGIONS;
+  servers = SERVERS;
   availableServers: string[] = [];
   selectedCharacterId: string | null = null;
   createdGuildId: string | null = null;
 
   newCharacter: Partial<Character> = {
     name: '',
+    server: '',
     role: undefined,
+    gearScore: 500,
     primaryWeapon: '',
     secondaryWeapon: ''
   };
@@ -59,13 +62,17 @@ export class UserNwGuildComponent implements OnInit {
   createCharacter(): void {
     if (
       this.newCharacter.name &&
+      this.newCharacter.server &&
       this.newCharacter.role &&
+      this.newCharacter.gearScore &&
       this.newCharacter.primaryWeapon &&
       this.newCharacter.secondaryWeapon
     ) {
       this.charactersService.createCharacter({
-        name: this.newCharacter.name,
+        name: this.newCharacter.name!,
+        server: this.newCharacter.server!,
         role: this.newCharacter.role as 'Tank' | 'Healer' | 'Support' | 'Bruiser' | 'Melee Dex' | 'Ranged Dex',
+        gearScore: this.newCharacter.gearScore!,
         primaryWeapon: this.newCharacter.primaryWeapon,
         secondaryWeapon: this.newCharacter.secondaryWeapon
       });
@@ -73,7 +80,9 @@ export class UserNwGuildComponent implements OnInit {
       // Reset form
       this.newCharacter = {
         name: '',
+        server: '',
         role: undefined,
+        gearScore: 500,
         primaryWeapon: '',
         secondaryWeapon: ''
       };

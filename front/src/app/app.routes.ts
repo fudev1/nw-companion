@@ -23,6 +23,8 @@ import { TenantNwApplyComponent } from './features/new-world/tenant/pages/tenant
 import { UserNwCharactersComponent } from './features/user/pages/user-nw-characters/user-nw-characters.component';
 import { UserNwGuildComponent } from './features/user/pages/user-nw-guild/user-nw-guild.component';
 import { CharactersComponent } from './features/new-world/pages/characters/characters.component';
+import { CharacterListComponent } from './features/new-world/components/character/character-list/character-list.component';
+import { CharacterDetailComponent } from './features/new-world/components/character/character-detail/character-detail.component';
 
 
 
@@ -55,8 +57,13 @@ export const routes: Routes = [
             { path: 'forum', component: ForumComponent},
             { 
                 path: 'characters', 
-                component: CharactersComponent, 
-                canActivate: [authGuard] 
+                // component: CharactersComponent, 
+                component: CharacterListComponent,
+                canActivate: [authGuard],
+                children: [
+                    { path: '', component: CharacterListComponent },
+                    { path: ':id', component: CharacterDetailComponent }
+                ] 
             },
             // { path: 'guild', component: UserNwGuildComponent }
         ]

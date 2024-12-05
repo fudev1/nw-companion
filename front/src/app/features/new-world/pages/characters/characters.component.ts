@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CharactersService } from '../../services/characters.service';
-import { Character, WEAPONS, ROLES } from '../../models/character.interface';
+import { Character, WEAPONS, ROLES, SERVERS } from '../../models/character.interface';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,11 +23,14 @@ export class CharactersComponent implements OnInit {
   characterToDelete: Character | null = null;
   weapons = WEAPONS;
   roles = ROLES;
+  servers = SERVERS;
   
 
   newCharacter: Partial<Character> = {
     name: '',
     role: 'undefined',
+    server: '',
+    gearScore: 500,
     primaryWeapon: '',
     secondaryWeapon: '',
   };
@@ -41,7 +44,9 @@ export class CharactersComponent implements OnInit {
   get isFormValid(): boolean {
     return !!(
       this.newCharacter.name &&
+      this.newCharacter.server &&
       this.newCharacter.role &&
+      this.newCharacter.gearScore &&
       this.newCharacter.primaryWeapon &&
       this.newCharacter.secondaryWeapon
     );
@@ -51,7 +56,9 @@ export class CharactersComponent implements OnInit {
     if (this.isFormValid) {
       this.charactersService.createCharacter({
         name: this.newCharacter.name!,
+        server: this.newCharacter.server!,
         role: this.newCharacter.role!,
+        gearScore: this.newCharacter.gearScore!,
         primaryWeapon: this.newCharacter.primaryWeapon!,
         secondaryWeapon: this.newCharacter.secondaryWeapon!,
       });
@@ -60,7 +67,9 @@ export class CharactersComponent implements OnInit {
 
       this.newCharacter = {
         name: '',
+        server: '',
         role: 'undefined',
+        gearScore: 500,
         primaryWeapon: '',
         secondaryWeapon: '',
       };

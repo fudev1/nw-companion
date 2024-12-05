@@ -1,0 +1,59 @@
+<div class="space-y-8">
+    @if (character$ | async; as character) {
+        <!-- CHARACTER HEADER -->
+        <div class="p-6 bg-gray-900 rounded-lg">
+        
+            <div class="flex items-start justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">{{ character.name }}</h1>
+                    <div class="mt-2 space-x-4">
+                        <span class="text-gray-400">{{ character.server }}</span>
+                        <span [class]="getRoleClass(character.role)">{{ character.role }}</span>
+                        @if (character.company) {
+                            <span class="text-gray-400">Company: {{ character.company }}</span>
+                        }
+                        <span [class]="getRoleClass(character.role)">{{ character.role }}</span>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <div class="text-2xl font-bold text-emerald-400">GS {{ character.gearScore }}</div>
+                    <div class="text-sm text-gray-400">Last updated {{ character.updatedAt | date }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARACTER INFO -->
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div class="p-6 bg-gray-900 rounded-lg">
+                <h2 class="mb-4 text-xl font-semibold text-white">Equipment</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-400">Primary Weapon</span>
+                        <span class="text-white">{{ character.primaryWeapon }}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-400">Secondary Weapon</span>
+                        <span class="text-white">{{ character.secondaryWeapon }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-gray-900 rounded-lg">
+                <h2 class="mb-4 text-xl font-semibold text-white">Stats</h2>
+                <!-- Add character stats here -->
+            </div>
+        </div>
+
+        <!-- Builds Section -->
+        <!-- ADD APP-CHARACTER-BUILDS COMPONENT HERE -->
+        <!-- <app-character-build [characterId]="character.id"></app-character-build> -->
+
+        <!-- TROPHY Section -->
+        <!-- ADD APP-CHARACTER-TROPHIES COMPONENT HERE -->
+        <!-- <app-character-trophy [characterId]="character.id"></app-character-trophy> -->
+    }
+    
+</div>
+

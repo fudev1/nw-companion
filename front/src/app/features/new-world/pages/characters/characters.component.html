@@ -1,33 +1,40 @@
 <div class="container px-4 py-8 mx-auto">
 
+
+    
     <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold bg-blue-300">Characters</h1>
+
+        
+        <!-- SI USER HAS PERSO : AFFICHER BOUTON -->
         @if (!!(characters$ | async)?.length) {
             <button 
                 (click)="showNewCharacterForm = true"
                 class="px-4 py-2 text-white transition-colors bg-blue-600 rounded-md hover:bg-blue-700">
                 New Character
-          </button>
+            </button>
         }
+
+
     </div>
+
+    
 
     @if (showNewCharacterForm) {
         <div class="p-6 mb-8 bg-white rounded-lg shadow-md">
 
             <div class="flex items-center justify-between mb-4">
                 <h2 class="mb-4 text-xl">Create New Character</h2>
-                <button 
-                    (click)="showNewCharacterForm = false"
-                    class="text-gray-500 hover:text-gray-700"
-                >
+                <button (click)="showNewCharacterForm = false" class="text-gray-500 hover:text-gray-700">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
 
-            
             <form (submit)="createCharacter()" class="space-y-4">
+
+                <!-- NAME -->
                 <div>
                     <label for="name" class="block mb-1 text-sm font-medium text-gray-700">Character Name</label>
                     <input 
@@ -39,6 +46,25 @@
                     />
                 </div>
 
+
+                <!-- SERVER -->
+                <div>
+                    <label for="name" class="block mb-1 text-sm font-medium text-gray-700">Server</label>
+                    <select
+                        id="server"
+                        [(ngModel)]="newCharacter.server"
+                        name="server"
+                        class="w-full px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    >
+                        <option value="">Select a server</option>
+                        @for (server of servers; track server) {
+                            <option [value]="server">{{ server }}</option>
+                        }
+                    </select>
+                </div>
+
+
+                <!-- ROLE -->
                 <div>
                     <label for="role" class="block mb-1 text-sm font-medium text-gray-700">Role</label>
                     <select 
@@ -49,13 +75,27 @@
 
                         <option value="">Select a Role</option>
                         @for (role of roles; track role) {
-                            <option value="{{ role }}">{{ role }}</option>
+                            <option [value]="role">{{ role }}</option>
                         }
                     </select>
-                   
-                    
                 </div>
 
+                <!-- GEAR SCORE -->
+                <div>
+                    <label for="gearScore" class="block mb-1 text-sm font-medium text-gray-700">GearScore</label>
+                    <input 
+                        type="number"
+                        id="gearScore"
+                        [(ngModel)]="newCharacter.gearScore"
+                        name="gearScore"
+                        min="500"
+                        max="725"
+                        class="w-full px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                </div>
+
+
+                <!-- PRIMARY WEAPON -->
                 <div>
                     <label for="primaryWeapon" class="block mb-1 text-sm font-medium text-gray-700">Primary Weapon</label>
                     <select
@@ -66,11 +106,13 @@
                     >
                         <option value="">Select a Weapon</option>
                         @for (weapon of weapons; track weapon) {
-                            <option value="{{ weapon }}">{{ weapon }}</option>
+                            <option [value]="weapon">{{ weapon }}</option>
                         }
                     </select>
                 </div>
 
+
+                <!-- SECONDARY WEAPON -->
                 <div>
                     <label for="secondaryWeapon" class="block mb-1 text-sm font-medium text-gray-700">Secondary Weapon</label>
                     <select
@@ -81,11 +123,13 @@
                     >
                         <option value="">Select a Weapon</option>
                         @for (weapon of weapons; track weapon) {
-                            <option value="{{ weapon }}">{{ weapon }}</option>
+                            <option [value]="weapon">{{ weapon }}</option>
                         }
                     </select>
                 </div>
 
+
+                <!-- BUTTONS -->
                 <div class="flex justify-end space-x-4">
                     <button 
                         type="button"
@@ -128,6 +172,10 @@
                             <p>Role: {{ character.role }}</p>
                             <p>Primary Weapon: {{ character.primaryWeapon }}</p>
                             <p>Secondary Weapon: {{ character.secondaryWeapon }}</p>
+                            <p>Gear Score: {{ character.gearScore }}</p>
+                            @if (character.company) {
+                                <p>Company: {{ character.company }}</p>
+                            }
                         </div>
                     </div>
                 }

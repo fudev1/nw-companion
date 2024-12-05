@@ -1,12 +1,16 @@
 export interface Character {
     id: string;
     name: string;
+    server: string;
+    company?: string;
     role: 'Tank' | 'Healer' | 'Support' | 'Bruiser' | 'Melee Dex' | 'Ranged Dex' | 'undefined';
     faction?: 'covenant' | 'marauder' | 'syndicate';
     primaryWeapon: string;
     secondaryWeapon: string;
     userId: string;
     createdAt: Date;
+    updatedAt: Date;
+    gearScore: number;
 }
 
 export const WEAPONS = [
@@ -31,4 +35,12 @@ export const ROLES = [
     'Bruiser',
     'Melee Dex',
     'Ranged Dex',
+] as const;
+
+export const SERVERS = [
+    'Abaton',
+    'Dry Tree',
+    'Barri',
+    'Nysa',
+    'Tartarus',
 ] as const;
