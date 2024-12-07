@@ -20,9 +20,6 @@ import { TenantNwMembersComponent } from './features/new-world/tenant/pages/tena
 import { TenantNwRosterComponent } from './features/new-world/tenant/pages/tenant-nw-roster/tenant-nw-roster.component';
 import { TenantNwEventsComponent } from './features/new-world/tenant/pages/tenant-nw-events/tenant-nw-events.component';
 import { TenantNwApplyComponent } from './features/new-world/tenant/pages/tenant-nw-apply/tenant-nw-apply.component';
-import { UserNwCharactersComponent } from './features/user/pages/user-nw-characters/user-nw-characters.component';
-import { UserNwGuildComponent } from './features/user/pages/user-nw-guild/user-nw-guild.component';
-import { CharactersComponent } from './features/new-world/pages/characters/characters.component';
 import { CharacterListComponent } from './features/new-world/components/character/character-list/character-list.component';
 import { CharacterDetailComponent } from './features/new-world/components/character/character-detail/character-detail.component';
 
@@ -36,12 +33,6 @@ export const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'about', component: AboutComponent},
             { path: 'contact', component: ContactComponent},
-            { 
-                path: 'characters', 
-                component: UserNwCharactersComponent, 
-                canActivate: [authGuard] 
-            },
-            { path: 'guild', component: UserNwGuildComponent }
         ]
     },
 
