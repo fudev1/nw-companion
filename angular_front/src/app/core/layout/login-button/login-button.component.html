@@ -1,7 +1,0 @@
-<button *ngIf="!isLoggedIn; else loggedInTemplate" (click)="fakeLogin()">
-    Connexion Test
-</button>
-
-<ng-template #loggedInTemplate>
-    <button (click)="logout()">Déconnexion</button>
-</ng-template>
