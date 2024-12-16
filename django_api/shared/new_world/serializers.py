@@ -5,16 +5,12 @@ from .models import NwCompany
 class NwCompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = NwCompany
-        fields = ['name', 'server', 'faction', 'owner']
+        fields = ['name', 'server', 'faction', 'owner', ]
 
 
         # extra_kwargs = {
         #     'server': {'required' : True},
         # }
-
-
-
-
 
         """
         extra_kwargs est un dictionnaire qui permet de spécifier des params supplémentaire pour certains champs du modèle
