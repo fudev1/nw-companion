@@ -22,6 +22,11 @@ sys.path.append(os.path.join(BASE_DIR, 'new_world'))
 # Initialiser le chargement de .env
 load_dotenv()
 
+# VARIABLES DISCORD 
+DISCORD_CLIENT_ID = os.getenv('DISCORD_CLIENT_ID')
+DISCORD_CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
+DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
