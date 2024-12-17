@@ -131,70 +131,23 @@ def discord_login_redirect(request: HttpRequest):
     #     "tokens": tokens
     # })
 
+
     # ✅➡️ 5. Réponse : Rediriger vers le frontend avec les tokens
     redirect_url = "http://localhost:4200/login/callback"
     query_params = urlencode({
         "access": access_token,
-        "refresh": refresh,
-        "user_id": user.discord_id
+        "refresh": str(refresh),
+        "user_id": user.discord_id,
+        "username": user.username,
+        "global_name": user.global_name,
+        "avatar": user.avatar,
+        "email": user.email,
+        "locale": user.locale,
+        "banner_color": user.banner_color,
+        "last_login": str(user.last_login)
     })
+    print("DEBUG - Données envoyées au frontend:")
+    print("Access Token:", access_token)
+    print("Refresh Token:", str(refresh))
+    print("Query Params:", query_params)
     return redirect(f"{redirect_url}?{query_params}")
-
-
-
-
-
-
-
-# def discord_login_redirect(request: HttpRequest):
-#     code = request.GET.get("code")
-#     if not code: 
-#         return HttpResponseBadRequest("code not provided")
-    
-#     # Échange le code temporaire contre un access_token
-#     token_data = exchange_code_for_token(code)
-#     if "error" in token_data:
-#         return JsonResponse({"error": token_data["error"]}, status=400)
-
-#     # Récupérer les informations utilisateur via l'access_token
-#     user_data = fetch_discord_user(token_data["access_token"])
-#     if "error" in user_data:
-#         return JsonResponse({"error": user_data["error"]}, status=400)
-
-#     return JsonResponse({"user": user_data, "token": token_data})
-
-
-
-
-
-# def exchange_code_for_token(code):
-#     """Échange un code temporaire contre un access_token."""
-#     token_url = "https://discord.com/api/oauth2/token"
-#     data = {
-#         "client_id": DISCORD_CLIENT_ID,
-#         "client_secret": DISCORD_CLIENT_SECRET,
-#         "grant_type": "authorization_code",
-#         "code": code,
-#         "redirect_uri": DISCORD_REDIRECT_URI,
-#     }
-#     headers = {"Content-Type": "application/x-www-form-urlencoded"}
-
-#     response = requests.post(token_url, data=data, headers=headers)
-#     if response.status_code != 200:
-#         return {"error": "Failed to obtain token"}
-#     return response.json()
-
-
-
-
-
-# def fetch_discord_user(access_token):
-#     """Utilise un access_token pour obtenir les informations utilisateur."""
-#     user_url = "https://discord.com/api/users/@me"
-#     headers = {"Authorization": f"Bearer {access_token}"}
-
-#     response = requests.get(user_url, headers=headers)
-#     if response.status_code != 200:
-#         return {"error": "Failed to fetch user info"}
-#     return response.json()
-
