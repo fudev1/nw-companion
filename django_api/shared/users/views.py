@@ -85,7 +85,7 @@ def discord_login_redirect(request: HttpRequest):
         return JsonResponse({"error": "Failed to fetch user info"}, status=400)
     
     user_data = user_response.json()
-    print(f'mon user data:', user_data)
+    # 🎯 print(f'mon user data:', user_data)
 
 
 
@@ -93,17 +93,22 @@ def discord_login_redirect(request: HttpRequest):
     user, created = TenantUser.objects.update_or_create(
         discord_id=user_data["id"],
         defaults={
+            # Champs indispensables (use [])
             "username": user_data["username"],
             "global_name": user_data["global_name"],
             "email": user_data["email"],
             "avatar": user_data["avatar"],
             "locale": user_data["locale"],
-            "public_flags": user_data.get("public_flags"),
-            "mfa_enabled": user_data.get("mfa_enabled"),
-            "banner": user_data.get("banner"),
-            "banner_color": user_data.get("banner_color"),
-            "accent_color": user_data.get("accent_color"),
-            "verified": user_data.get("verified"),
+            "public_flags": user_data["public_flags"],
+
+            # Champs optionnels (use get() avec valeur par defaut si aucun key)
+            "mfa_enabled": user_data.get("mfa_enabled", False),
+            "banner": user_data.get("banner", None),
+            "banner_color": user_data.get("banner_color", None),
+            "accent_color": user_data.get("accent_color", None),
+            "verified": user_data.get("verified", False),
+
+            # Champs généré coté server
             "last_login": now(),
         }
     )
@@ -144,10 +149,14 @@ def discord_login_redirect(request: HttpRequest):
         "email": user.email,
         "locale": user.locale,
         "banner_color": user.banner_color,
-        "last_login": str(user.last_login)
+        "last_login": user.last_login.isoformat(),
     })
-    print("DEBUG - Données envoyées au frontend:")
-    print("Access Token:", access_token)
-    print("Refresh Token:", str(refresh))
-    print("Query Params:", query_params)
+
+    # 🎯🎯 --. DEBUG 
+    # print("DEBUG - Données envoyées au frontend:")
+    # print("Access Token:", access_token)
+    # print("Refresh Token:", str(refresh))
+    # print("Query Params:", query_params)
+
+
     return redirect(f"{redirect_url}?{query_params}")
