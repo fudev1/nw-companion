@@ -28,6 +28,11 @@ DISCORD_CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
 DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI')
 DISCORD_AUTH_URL = os.getenv('DISCORD_AUTH_URL')
 
+print(os.getenv('DISCORD_CLIENT_ID'))
+print(os.getenv('DISCORD_CLIENT_SECRET'))
+print(os.getenv('DISCORD_REDIRECT_URI'))
+print(os.getenv('DISCORD_AUTH_URL'))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

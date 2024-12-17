@@ -96,3 +96,35 @@ Créer les endpoints essentiels pour les fonctionnalités suivantes :
 - Création de personnages et compagnies.
 - Navigation dynamique entre les contextes.
 - Provisionnement de tenants opérationnel.
+
+
+
+
+
+Parfait, tu as une excellente base fonctionnelle maintenant ! 🎉
+
+Avec cette réponse JSON, ton système :
+
+Authentifie l'utilisateur Discord.
+Génère et renvoie les tokens JWT (refresh et access).
+Stocke les informations utilisateur en base de données.
+Prochaines Étapes
+Frontend :
+
+Implémente la gestion des tokens dans le frontend :
+Stocke le access et refresh token (par exemple dans le localStorage ou sessionStorage).
+Utilise le access token pour accéder aux API sécurisées.
+Rafraîchis le token lorsque l'access expire en appelant l'endpoint /api/token/refresh.
+Backend :
+
+Protéger les API : Ajoute des permissions sur tes ViewSets ou endpoints pour exiger une authentification JWT. Exemple avec Django REST Framework :
+python
+Copier le code
+from rest_framework.permissions import IsAuthenticated
+
+class SomeProtectedViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    ...
+Session Persistante : Si tu veux gérer une déconnexion automatique lorsque le token expire ou implémenter une logique de "reconnexion silencieuse", configure le refresh token côté frontend pour qu'il régénère un nouvel access token.
+
+Personnalisation JWT (optionnel) : Si tu veux inclure des informations supplémentaires dans les payloads des tokens JWT (comme username, discord_id), tu peux étendre TokenObtainPairView.
