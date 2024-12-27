@@ -67,6 +67,7 @@ TENANT_TYPES = {
             'shared.users',
             'shared.tenants',
             'shared.new_world',
+            'shared.characters',
 
             # Django apps par défaut
             'django.contrib.admin',

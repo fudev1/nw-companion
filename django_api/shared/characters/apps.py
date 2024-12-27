@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class CharactersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'games.new_world.characters'
-    label = 'new_world_characters'
+    name = 'shared.characters'
+    label = 'characters'
