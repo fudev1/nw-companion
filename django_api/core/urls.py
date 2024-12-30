@@ -34,7 +34,8 @@ urlpatterns = [
     # URL PUBLIC
     path('api/users/', include('shared.users.urls')),                               
     path('api/tenants/', include('shared.tenants.urls')),                           
-    path('api/new_world/', include('shared.new_world.urls')),      
+    # path('api/new_world/', include('shared.new_world.companies.urls')),   
+    path('api/characters/', include('shared.characters.urls')),   
 
     # URL TENANT
     # path('api/members', include('games.discord.members.urls')),

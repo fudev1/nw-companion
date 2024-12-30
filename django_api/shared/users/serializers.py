@@ -16,16 +16,16 @@ class TenantUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'password': {'write_only': True}}
 
-    @transaction.atomic
-    def create(self, validated_data): 
-        user = TenantUser(
-            last_name=validated_data['last_name'],
-            first_name=validated_data['first_name'],
-            email=validated_data['email']
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+    # @transaction.atomic
+    # def create(self, validated_data): 
+    #     user = TenantUser(
+    #         last_name=validated_data['last_name'],
+    #         first_name=validated_data['first_name'],
+    #         email=validated_data['email']
+    #     )
+    #     user.set_password(validated_data['password'])
+    #     user.save()
+    #     return user
     
 
 

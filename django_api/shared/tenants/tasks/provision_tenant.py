@@ -13,7 +13,7 @@ from django_tenants.utils import (
 )
 
 from tenant_users.tenants.models import ExistsError, InactiveError, SchemaError
-from shared.new_world.models import NwCompany
+from shared.companies.models import NwCompany
 
 
 UserModel = get_user_model()

@@ -2,7 +2,7 @@ from tenant_users.tenants.tasks import provision_tenant
 from django.core.management import call_command
 from django.db import transaction
 from shared.tenants.models import Tenant
-from shared.new_world.models import NwCompany
+from shared.new_world.companies.models import NwCompany
 
 @transaction.atomic
 def provision_nwcompany(tenant_name, tenant_slug, user, server, faction, **kwargs):

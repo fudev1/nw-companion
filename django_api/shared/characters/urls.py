@@ -1,10 +1,9 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from shared.new_world import views
+from .views import NwCharacterViewSet
 
 router = DefaultRouter()
-router.register(r'companies', views.NwCompanyViewSet, basename='nwcompany')
-
+router.register(r'new-world', NwCharacterViewSet, basename='nw-character')
 
 urlpatterns = [
     path('', include(router.urls)),

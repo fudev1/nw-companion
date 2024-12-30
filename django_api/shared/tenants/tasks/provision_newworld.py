@@ -5,7 +5,7 @@ from django.db import transaction
 from django.utils.text import slugify
 from django_tenants.utils import schema_context, get_public_schema_name, get_tenant_domain_model, has_multi_type_tenants, get_tenant_types, get_multi_type_database_field_name
 from tenant_users.tenants.models import ExistsError, InactiveError, SchemaError
-from shared.new_world.models import NwCompany
+from shared.new_world.companies.models import NwCompany
 from django.core.management import call_command
 
 

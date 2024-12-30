@@ -28,10 +28,10 @@ DISCORD_CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
 DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI')
 DISCORD_AUTH_URL = os.getenv('DISCORD_AUTH_URL')
 
-print(os.getenv('DISCORD_CLIENT_ID'))
-print(os.getenv('DISCORD_CLIENT_SECRET'))
-print(os.getenv('DISCORD_REDIRECT_URI'))
-print(os.getenv('DISCORD_AUTH_URL'))
+# print(os.getenv('DISCORD_CLIENT_ID'))
+# print(os.getenv('DISCORD_CLIENT_SECRET'))
+# print(os.getenv('DISCORD_REDIRECT_URI'))
+# print(os.getenv('DISCORD_AUTH_URL'))
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -66,8 +66,13 @@ TENANT_TYPES = {
 
             'shared.users',
             'shared.tenants',
-            'shared.new_world',
             'shared.characters',
+            # 'shared.new_world.companies',
+            # 'shared.new_world.wars',
+            # 'shared.new_world.characters',
+            # 'shared.new_world.servers',
+            # 'shared.new_world.factions',
+                        
 
             # Django apps par défaut
             'django.contrib.admin',
@@ -92,11 +97,10 @@ TENANT_TYPES = {
             'django.contrib.auth',
             'tenant_users.permissions',
 
-            # 'shared.new_world',
-            'games.discord.members',
-            'games.discord.roles',
-            'games.new_world.characters',
-            'games.new_world.wars',
+            # 'games.discord.members',
+            # 'games.discord.roles',
+            # 'games.new_world.characters',
+            # 'games.new_world.wars',
 
             'django.contrib.sessions',
             'django.contrib.messages',

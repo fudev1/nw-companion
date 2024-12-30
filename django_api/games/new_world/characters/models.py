@@ -3,7 +3,7 @@ from django.conf import settings
 
 # Create your models here.
 
-class Character(models.Model):
+class NwCharacter(models.Model):
 
     FACTION_CHOICES = [
         ('marauders', 'Marauders'),
