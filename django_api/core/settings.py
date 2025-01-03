@@ -67,6 +67,7 @@ TENANT_TYPES = {
             'shared.users',
             'shared.tenants',
             'shared.characters',
+            'shared.builds',
             # 'shared.new_world.companies',
             # 'shared.new_world.wars',
             # 'shared.new_world.characters',
