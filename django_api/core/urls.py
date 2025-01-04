@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/tenants/', include('shared.tenants.urls')),                           
     path('api/characters/', include('shared.characters.urls')),   
     path('api/builds/', include('shared.builds.urls')),
+    path('api/new-world/', include('shared.new_world.urls')),
     # path('api/new_world/', include('shared.new_world.companies.urls')),   
 
     # URL TENANT

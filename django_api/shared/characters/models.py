@@ -1,8 +1,7 @@
 from django.db import models
 from shared.users.models import TenantUser
+from shared.new_world.models import NwFaction, NwServer, NwRole
 
-
-# Model de base pour les characters de tous les jeux
 class BaseCharacter(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(TenantUser, on_delete=models.CASCADE)
@@ -10,41 +9,31 @@ class BaseCharacter(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     avatar_url = models.URLField(null=True, blank=True)
 
-    # class Meta: 
-    #     abstract = True
-    #     unique_together = ['name', 'server']
-
     def __str__(self):
         return f"{self.name} ({self.user.username})"
-    
 
-# Model character pour New World
 class NwCharacter(BaseCharacter):
-    FACTION_CHOICES = [ 
-        ('marauders', 'Marauders'),
-        ('syndicate', 'Syndicate'),
-        ('covenant', 'Covenant'),
-    ]
+    server = models.ForeignKey(NwServer, on_delete=models.PROTECT, related_name='characters', null=True, blank=True)
+    faction = models.ForeignKey(NwFaction, null=True, blank=True, on_delete=models.PROTECT, related_name='characters') 
+    roles_type = models.ForeignKey(NwRole, on_delete=models.PROTECT, related_name='characters')
+    active_build = models.ForeignKey('builds.NwBuild', null=True, blank=True, on_delete=models.SET_NULL, related_name='active_for_characters')
+    war_ready = models.BooleanField(default=False)
 
-    ROLES_CHOICES = [
-        ('point', 'Point'),
-        ('bruiser', 'Bruiser'),
-        ('mage', 'Mage'),
-        ('healer', 'Healer'),
-        ('support', 'Support'),
-        ('assassin', 'Assassin'),
-    ]
+    @property
+    def current_role(self):
+        return self.active_build.role if self.active_build else self.roles_type
+    
+    @property
+    def current_gs(self):
+        return self.active_build.equipment.calculated_gs if self.active_build and hasattr(self.active_build, 'equipment') else 0
+    
+    def __str__(self):
+        faction_name = self.faction.name if self.faction else "No Faction"
+        server_name = self.server.name if self.server else "No Server"
+        return f"{self.name} ({server_name} - {faction_name})"
+    
+    class Meta:
+        ordering = ['server__region', 'server', 'name']
 
-    server = models.CharField(null=True, blank=True)
-    faction = models.CharField(max_length=50, choices=FACTION_CHOICES)
-    roles_type = models.CharField(max_length=50, choices=ROLES_CHOICES)
-
-    # class Meta: 
-    #     db_table = 'characters_nwcharacter'
-
-
-
-# Model character pour TL
 class TlCharacter(BaseCharacter):
-    # ajouter les champs spécifiques pour TL plus tard
-    pass 
+    pass
