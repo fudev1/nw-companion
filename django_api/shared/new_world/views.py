@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import NwRegion, NwServer
-from .serializers import NwRegionSerializer, NwServerSerializer
+from .models import NwRegion, NwServer, NwFaction, NwRole
+from .serializers import NwRegionSerializer, NwServerSerializer, NwFactionSerializer, NwRoleSerializer
 
 
 class NwRegionViewSet(viewsets.ModelViewSet):
@@ -31,3 +31,22 @@ class NwServerViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(region_id=region_id)
         return queryset.select_related('region')
     
+
+class NwFactionViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Liste des factions dispo pour New World
+    Get /api/new-world/factions/
+    """
+    queryset = NwFaction.objects.filter(is_active=True)
+    serializer_class = NwFactionSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class NwRoleViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Liste des rôles dispo pour New World
+    Get /api/new-world/roles/
+    """
+    queryset = NwRole.objects.filter(is_active=True)
+    serializer_class = NwRoleSerializer
+    permission_classes = [permissions.AllowAny]
